@@ -2,10 +2,13 @@
 
 # dependencies
 node_modules/
+.yarn/
 
 # Expo
 .expo/
 dist/
+android/
+ios/
 web-build/
 
 # Native
