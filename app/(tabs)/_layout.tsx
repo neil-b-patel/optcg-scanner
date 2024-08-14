@@ -6,7 +6,7 @@ import { Pressable } from 'react-native'
 import Colors from '@/constants/Colors'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue'
-import { useFirstTimeOpen } from '@/hooks/useFirstTimeOpen'
+import { Camera } from 'react-native-vision-camera'
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['name']; color: string }) {
@@ -15,10 +15,11 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['nam
 
 export default function TabLayout() {
   const colorScheme = useColorScheme()
-  const { isFirstTime, isLoading } = useFirstTimeOpen()
 
-  if (isLoading) return <></>
-  if (isFirstTime) return <Redirect href={'./onboarding'} />
+  if (Camera.getCameraPermissionStatus() !== 'granted') {
+    return <Redirect href={'/permissions'} />
+  }
+
   return (
     <Tabs
       screenOptions={{
@@ -32,7 +33,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Scanner',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="camera" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -53,7 +54,7 @@ export default function TabLayout() {
         name="history"
         options={{
           title: 'History',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="history" color={color} />,
         }}
       />
     </Tabs>

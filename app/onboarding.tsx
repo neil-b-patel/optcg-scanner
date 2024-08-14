@@ -1,30 +1,18 @@
-import { Alert, Button, StyleSheet } from 'react-native'
+import { Button, StyleSheet } from 'react-native'
 
 import { Text, View } from '@/components/Themed'
-import { useCameraPermissions } from 'expo-camera'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { router } from 'expo-router'
+import { Camera } from 'react-native-vision-camera'
 
 export default function Onboarding() {
-  const [cameraPermissions, requestCameraPermissions] = useCameraPermissions()
-
   async function handleContinue() {
-    const allPermissions = await requestAllPermissions()
-    if (allPermissions) {
+    const cameraPermissionStatus = Camera.getCameraPermissionStatus()
+
+    if (cameraPermissionStatus == 'granted') {
       router.replace('/(tabs)')
     } else {
-      Alert.alert('To continue please provide required permissions in your settings.')
+      router.replace('/permissions')
     }
-  }
-
-  async function requestAllPermissions() {
-    const cameraStatus = await requestCameraPermissions()
-    if (!cameraStatus.granted) {
-      Alert.alert('Error', 'Camera permissions are required.')
-      return false
-    }
-    await AsyncStorage.setItem('hasOpened', 'true')
-    return true
   }
 
   return (
