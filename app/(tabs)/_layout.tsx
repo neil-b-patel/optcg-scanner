@@ -1,12 +1,13 @@
 import React from 'react'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { Link, Redirect, Tabs } from 'expo-router'
 import { Pressable } from 'react-native'
+import { Camera } from 'react-native-vision-camera'
+
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 
 import Colors from '@/constants/Colors'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue'
-import { Camera } from 'react-native-vision-camera'
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>['name']; color: string }) {
