@@ -19,8 +19,10 @@ export PATH="$ANDROID_HOME/platform-tools:$PATH"
 
 3. Run `yarn` to install dependencies.
 
-4. Run `npx expo start --tunnel` to start the Expo server. Choose the relevant options.
+4. Run `npx expo prebuild` to generate native code before compiling project.
 
-5. Run `npx prettier . --write` before committing changes.
+5. Run `npx expo start --tunnel` to start the Expo dev server. Choose the relevant options.
 
-6. Create a PR and tag `@neil-b-patel` as a reviewer.
+6. Run `npx prettier . --write` before committing changes.
+
+7. Create a PR and tag `@neil-b-patel` as a reviewer.
